@@ -6,6 +6,7 @@ const {
 	Review,
 	ReviewImage,
 	Sequelize,
+	sequelize,
 } = require("../../db/models");
 const router = express.Router();
 const { check } = require("express-validator");
@@ -146,7 +147,7 @@ router.get("/:spotId", async (req, res) => {
 	const spot = await Spot.findByPk(req.params.spotId, {
 		attributes: {
 			include: [
-				[Sequelize.fn("COUNT", Sequelize.col("Reviews.id")), "numReviews"],
+				[sequelize.l],
 				[Sequelize.fn("AVG", Sequelize.col("Reviews.stars")), "avgStarRating"],
 			],
 		},
